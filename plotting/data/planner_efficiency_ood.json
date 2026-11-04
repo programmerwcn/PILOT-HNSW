@@ -1,0 +1,78 @@
+{
+  "schema_version": 1,
+  "dataset": "GIST1M",
+  "protocol": {
+    "train_queries": 4000,
+    "validation_queries": 1000,
+    "ood_queries": 432,
+    "ood_sampling": "144 queries from each shifted minEF band; no train/test overlap",
+    "adaptive_rounds": 20,
+    "adaptive_features": 51,
+    "adaptive_anchor_features": 0,
+    "adaptive_serving_caps": [609, 1172, 2680],
+    "ood_ndc_accounting": "exact + pca_dims/960 + shared PCA64 query projection (64 NDC)"
+  },
+  "training_cost": {
+    "Pilot": {"queries": 4000, "learner_rows": 4000, "fit_seconds": 0.0606098354, "model_bytes": 208854, "features": 51, "calls_per_query": 1.0, "microseconds_per_call": 66.5517, "microseconds_per_query": 66.5517},
+    "LAET": {"queries": 4000, "learner_rows": 3974, "fit_seconds": 1.4473283403, "model_bytes": 338668, "features": 965, "calls_per_query": 1.0, "microseconds_per_call": 48.3884, "microseconds_per_query": 48.3884},
+    "DARTH": {"queries": 4000, "learner_rows": 2683988, "fit_seconds": 2.8462628052, "model_bytes": 314448, "features": 11, "calls_per_query": 11.122, "microseconds_per_call": 40.0504, "microseconds_per_query": 445.4406}
+  },
+  "sample_efficiency": {
+    "metric_note": "Each score is divided by that method's own full-training score; raw objectives differ across methods.",
+    "Pilot": {
+      "full_score": 0.765,
+      "points": [
+        {"queries": 25, "learner_rows": 25, "score": 0.3336, "score_std": 0.0044542},
+        {"queries": 50, "learner_rows": 50, "score": 0.6292, "score_std": 0.0096208},
+        {"queries": 100, "learner_rows": 100, "score": 0.6674, "score_std": 0.0251125},
+        {"queries": 250, "learner_rows": 250, "score": 0.7064, "score_std": 0.0161320},
+        {"queries": 500, "learner_rows": 500, "score": 0.7248, "score_std": 0.0150785},
+        {"queries": 1000, "learner_rows": 1000, "score": 0.7394, "score_std": 0.0112534},
+        {"queries": 2000, "learner_rows": 2000, "score": 0.7526, "score_std": 0.0046733},
+        {"queries": 4000, "learner_rows": 4000, "score": 0.7650, "score_std": 0.0}
+      ]
+    },
+    "LAET": {
+      "full_score": 0.2994974874,
+      "points": [
+        {"queries": 100, "learner_rows": 99.4, "score": 0.2192964824, "score_std": 0.0058740},
+        {"queries": 250, "learner_rows": 248.8, "score": 0.2309547739, "score_std": 0.0082486},
+        {"queries": 500, "learner_rows": 497.6, "score": 0.2528643216, "score_std": 0.0065935},
+        {"queries": 1000, "learner_rows": 993.6, "score": 0.2588944724, "score_std": 0.0121537},
+        {"queries": 2000, "learner_rows": 1987.0, "score": 0.2806030151, "score_std": 0.0032035},
+        {"queries": 4000, "learner_rows": 3974.0, "score": 0.2994974874, "score_std": 0.0}
+      ]
+    },
+    "DARTH": {
+      "full_score": 0.8836061519,
+      "points": [
+        {"queries": 100, "learner_rows": 66845.0, "score": 0.8259969471, "score_std": 0.0121612},
+        {"queries": 250, "learner_rows": 167775.8, "score": 0.8410501032, "score_std": 0.0081374},
+        {"queries": 500, "learner_rows": 335515.4, "score": 0.8523411980, "score_std": 0.00517798},
+        {"queries": 1000, "learner_rows": 670641.8, "score": 0.8677363531, "score_std": 0.00328684},
+        {"queries": 2000, "learner_rows": 1344020.8, "score": 0.8754303916, "score_std": 0.00139285},
+        {"queries": 4000, "learner_rows": 2683988.0, "score": 0.8836061519, "score_std": 0.00063714}
+      ]
+    }
+  },
+  "ood_zero_shot": {
+    "Pilot": {"recall_at_100": 0.9392361111, "target_attainment": 0.8310185185, "end_to_end_ndc": 6726.6382716, "tier_accuracy": 0.8333333333, "balanced_accuracy": 0.8012177900, "macro_f1": 0.7789228507},
+    "LAET": {"recall_at_100": 0.8721759259, "target_attainment": 0.4166666667, "end_to_end_ndc": 11613.5370370},
+    "DARTH": {"recall_at_100": 0.8936805556, "target_attainment": 0.5208333333, "end_to_end_ndc": 14505.1805556}
+  },
+  "adaptive_transfer": {
+    "iid": {"balanced_accuracy": 0.782122, "macro_f1": 0.779374},
+    "zero_shot": {"balanced_accuracy": 0.8012177900, "macro_f1": 0.7789228507, "recall_at_100": 0.9392361111, "target_attainment": 0.8310185185, "end_to_end_ndc": 6726.6382716},
+    "fewshot_500": {"tier_accuracy": 0.709722, "recall_at_100": 0.9066990741, "target_attainment": 0.6393518519, "end_to_end_ndc": 5736.0329938, "underestimate_rate": 0.207407},
+    "fewshot_safe_500": {"tier_accuracy": 0.718519, "recall_at_100": 0.9248287037, "target_attainment": 0.7518518519, "end_to_end_ndc": 6628.4160494, "underestimate_rate": 0.099537}
+  },
+  "provenance": [
+    "results/gist_zero_anchor/adaptive_sample_efficiency_r20.json",
+    "results/gist_zero_anchor/termination_training_and_sample_efficiency.json",
+    "results/gist_zero_anchor/predictor_latency.json",
+    "results/gist_zero_anchor/adaptive_ood_pcanav_corrected_summary.json",
+    "results/gist_zero_anchor/adaptive_ood_classifier_accuracy_corrected.json",
+    "results/gist_zero_anchor/ood_baselines/laet_result.json",
+    "results/gist_zero_anchor/ood_baselines/darth_result.json"
+  ]
+}

@@ -1,0 +1,645 @@
+{
+ "target": 0.9,
+ "populations": {
+  "GIST1M": {
+   "name": "5,000-query LEARN sample",
+   "kind": "natural"
+  },
+  "SIFT100M": {
+   "name": "balanced shifted stress, n=432",
+   "kind": "stress"
+  },
+  "Deep100M": {
+   "name": "public held-out TEST 1K",
+   "kind": "natural"
+  },
+  "LAION-10M": {
+   "name": "official 1,000-query test set",
+   "kind": "natural"
+  }
+ },
+ "conservative_ef": {
+  "GIST1M": 2680,
+  "SIFT100M": 2048,
+  "Deep100M": 1000,
+  "LAION-10M": 3800
+ },
+ "frontier": {
+  "GIST1M": [
+   {
+    "ef": 200,
+    "recall": 0.6638,
+    "ndc": 3458.1306,
+    "attainment": 0.016
+   },
+   {
+    "ef": 300,
+    "recall": 0.740818,
+    "ndc": 4878.1138,
+    "attainment": 0.0708
+   },
+   {
+    "ef": 400,
+    "recall": 0.78777,
+    "ndc": 6215.3994,
+    "attainment": 0.1526
+   },
+   {
+    "ef": 600,
+    "recall": 0.8439840000000001,
+    "ndc": 8702.2198,
+    "attainment": 0.3268
+   },
+   {
+    "ef": 800,
+    "recall": 0.8763740000000002,
+    "ndc": 11001.825,
+    "attainment": 0.482
+   },
+   {
+    "ef": 1000,
+    "recall": 0.8973180000000001,
+    "ndc": 13166.3284,
+    "attainment": 0.59
+   },
+   {
+    "ef": 1050,
+    "recall": 0.9014459999999999,
+    "ndc": 13689.7132,
+    "attainment": 0.614
+   },
+   {
+    "ef": 1100,
+    "recall": 0.9052020000000001,
+    "ndc": 14206.9058,
+    "attainment": 0.6366
+   },
+   {
+    "ef": 1200,
+    "recall": 0.9120080000000002,
+    "ndc": 15223.3018,
+    "attainment": 0.6784
+   },
+   {
+    "ef": 1300,
+    "recall": 0.9178040000000001,
+    "ndc": 16218.2666,
+    "attainment": 0.714
+   },
+   {
+    "ef": 1500,
+    "recall": 0.9272540000000001,
+    "ndc": 18145.0612,
+    "attainment": 0.7648
+   },
+   {
+    "ef": 2000,
+    "recall": 0.943084,
+    "ndc": 22682.0594,
+    "attainment": 0.8582
+   },
+   {
+    "ef": 2680,
+    "recall": 0.9557080000000002,
+    "ndc": 28350.8638,
+    "attainment": 0.9168
+   },
+   {
+    "ef": 2937,
+    "recall": 0.9588880000000001,
+    "ndc": 30375.2484,
+    "attainment": 0.9308
+   },
+   {
+    "ef": 4225,
+    "recall": 0.969776,
+    "ndc": 39797.988,
+    "attainment": 0.9668
+   }
+  ],
+  "SIFT100M": [
+   {
+    "ef": 256,
+    "recall": 0.81481,
+    "ndc": 5054,
+    "attainment": 0.3264
+   },
+   {
+    "ef": 500,
+    "recall": 0.89248,
+    "ndc": 9230,
+    "attainment": 0.6111
+   },
+   {
+    "ef": 640,
+    "recall": 0.91444,
+    "ndc": 11522,
+    "attainment": 0.6736
+   },
+   {
+    "ef": 1024,
+    "recall": 0.94699,
+    "ndc": 17549,
+    "attainment": 0.8102
+   },
+   {
+    "ef": 2048,
+    "recall": 0.97551,
+    "ndc": 32369,
+    "attainment": 0.9421
+   },
+   {
+    "ef": 4000,
+    "recall": 0.98958,
+    "ndc": 57994,
+    "attainment": 0.9884
+   }
+  ],
+  "Deep100M": [
+   {
+    "ef": 250,
+    "recall": 0.88402,
+    "ndc": 4540.5,
+    "attainment": 0.619
+   },
+   {
+    "ef": 300,
+    "recall": 0.90058,
+    "ndc": 5296.7,
+    "attainment": 0.675
+   },
+   {
+    "ef": 400,
+    "recall": 0.92271,
+    "ndc": 6763.2,
+    "attainment": 0.742
+   },
+   {
+    "ef": 500,
+    "recall": 0.9371,
+    "ndc": 8183.1,
+    "attainment": 0.797
+   },
+   {
+    "ef": 600,
+    "recall": 0.94715,
+    "ndc": 9563.0,
+    "attainment": 0.839
+   },
+   {
+    "ef": 750,
+    "recall": 0.95709,
+    "ndc": 11565.5,
+    "attainment": 0.874
+   },
+   {
+    "ef": 1000,
+    "recall": 0.96707,
+    "ndc": 14780.1,
+    "attainment": 0.921
+   },
+   {
+    "ef": 1500,
+    "recall": 0.97741,
+    "ndc": 20856.4,
+    "attainment": 0.953
+   },
+   {
+    "ef": 2000,
+    "recall": 0.98345,
+    "ndc": 26626.2,
+    "attainment": 0.967
+   }
+  ],
+  "LAION-10M": [
+   {
+    "ef": 1200,
+    "recall": 0.89253,
+    "ndc": 10752.4,
+    "attainment": 0.667
+   },
+   {
+    "ef": 1400,
+    "recall": 0.90083,
+    "ndc": 12274.3,
+    "attainment": 0.7
+   },
+   {
+    "ef": 1600,
+    "recall": 0.90811,
+    "ndc": 13771.3,
+    "attainment": 0.723
+   },
+   {
+    "ef": 2000,
+    "recall": 0.91805,
+    "ndc": 16671.0,
+    "attainment": 0.75
+   },
+   {
+    "ef": 3000,
+    "recall": 0.93227,
+    "ndc": 23658.6,
+    "attainment": 0.799
+   },
+   {
+    "ef": 3800,
+    "recall": 0.93899,
+    "ndc": 29001.9,
+    "attainment": 0.824
+   },
+   {
+    "ef": 5000,
+    "recall": 0.94699,
+    "ndc": 36844.6,
+    "attainment": 0.847
+   },
+   {
+    "ef": 8000,
+    "recall": 0.96052,
+    "ndc": 55602.1,
+    "attainment": 0.89
+   }
+  ]
+ },
+ "rows": [
+  {
+   "dataset": "GIST1M",
+   "method": "plain",
+   "selected": true,
+   "config": "fixed ef=2680 (conservative)",
+   "recall": 0.9557080000000002,
+   "ndc": 28350.8638,
+   "attainment": 0.9168,
+   "source": "plain frontier, GIST1M",
+   "reaches_target": true,
+   "grid_limited": null
+  },
+  {
+   "dataset": "GIST1M",
+   "method": "DARTH",
+   "config": "ef=1000",
+   "recall": 0.8782,
+   "ndc": 11155,
+   "attainment": 0.457,
+   "source": "results/darth_same_graph/result.json",
+   "selected": false,
+   "pending": false
+  },
+  {
+   "dataset": "GIST1M",
+   "method": "DARTH",
+   "config": "ef=1100",
+   "recall": 0.8999,
+   "ndc": 13344,
+   "attainment": 0.618,
+   "source": "results/darth_same_graph_ef1100/result.json",
+   "selected": false,
+   "pending": false
+  },
+  {
+   "dataset": "GIST1M",
+   "method": "DARTH",
+   "config": "ef=1200",
+   "recall": 0.9105,
+   "ndc": 14884,
+   "attainment": 0.675,
+   "source": "results/darth_same_graph_ef1200/result.json",
+   "selected": true,
+   "pending": false
+  },
+  {
+   "dataset": "GIST1M",
+   "method": "DARTH",
+   "config": "ef=1500",
+   "recall": 0.92604,
+   "ndc": 17827.2,
+   "attainment": 0.7602,
+   "source": "results/darth_same_graph_ef1500/result.json",
+   "selected": false,
+   "pending": false
+  },
+  {
+   "dataset": "GIST1M",
+   "method": "LAET",
+   "config": "a=0.80",
+   "recall": 0.89838,
+   "ndc": 14032.5,
+   "attainment": 0.5917,
+   "source": "results/laet_same_graph/result.json (validation curve)",
+   "selected": false,
+   "pending": false
+  },
+  {
+   "dataset": "GIST1M",
+   "method": "LAET",
+   "config": "a=0.85",
+   "recall": 0.9055,
+   "ndc": 14924,
+   "attainment": 0.64,
+   "source": "results/laet_same_graph/result.json",
+   "selected": true,
+   "pending": false
+  },
+  {
+   "dataset": "GIST1M",
+   "method": "Ours",
+   "config": "tiers 609/1172/2680, P75",
+   "recall": 0.9202,
+   "ndc": 4990,
+   "attainment": 0.763,
+   "source": "gist_summary.md 3.7",
+   "selected": true,
+   "pending": false
+  },
+  {
+   "dataset": "SIFT100M",
+   "method": "plain",
+   "selected": true,
+   "config": "fixed ef=2048 (conservative)",
+   "recall": 0.97551,
+   "ndc": 32369,
+   "attainment": 0.9421,
+   "source": "plain frontier, SIFT100M",
+   "reaches_target": true,
+   "grid_limited": null
+  },
+  {
+   "dataset": "SIFT100M",
+   "method": "DARTH",
+   "config": "EF=500",
+   "recall": 0.85889,
+   "ndc": 6926,
+   "attainment": 0.4306,
+   "source": "sift100m_M16efc100 6.1",
+   "selected": false,
+   "pending": false
+  },
+  {
+   "dataset": "SIFT100M",
+   "method": "DARTH",
+   "config": "EF=2048",
+   "recall": 0.91718,
+   "ndc": 17274,
+   "attainment": 0.6829,
+   "source": "sift100m_M16efc100 6.2",
+   "selected": true,
+   "pending": false
+  },
+  {
+   "dataset": "SIFT100M",
+   "method": "LAET",
+   "config": "EF=2048, a=0.95",
+   "recall": 0.87417,
+   "ndc": 8855,
+   "attainment": 0.4491,
+   "source": "sift100m_M16efc100 6.2",
+   "selected": false,
+   "pending": false
+  },
+  {
+   "dataset": "SIFT100M",
+   "method": "LAET",
+   "config": "EF=2048, a=1.50",
+   "recall": 0.92715,
+   "ndc": 13718,
+   "attainment": 0.7593,
+   "source": "sift100m_M16efc100 6.2",
+   "selected": true,
+   "pending": false
+  },
+  {
+   "dataset": "SIFT100M",
+   "method": "Ours",
+   "config": "adaptive-2048, PCA margin 1.00",
+   "recall": 0.89391,
+   "ndc": 9190.0,
+   "attainment": 0.5764,
+   "source": "sift100m_M16efc100 7.2",
+   "selected": false,
+   "pending": false
+  },
+  {
+   "dataset": "SIFT100M",
+   "method": "Ours",
+   "config": "adaptive-2048, PCA margin 1.05",
+   "recall": 0.90035,
+   "ndc": 9800.4,
+   "attainment": 0.5787,
+   "source": "sift100m_M16efc100 7.2",
+   "selected": false,
+   "pending": false
+  },
+  {
+   "dataset": "SIFT100M",
+   "method": "Ours",
+   "config": "exact 256/640/1024, r100",
+   "recall": 0.9159953703703705,
+   "ndc": 11292.86574074074,
+   "attainment": 0.6504629629629629,
+   "source": "results/reported_walltime/sift_formal_r100_exact_ef1024.json",
+   "selected": true,
+   "pending": false
+  },
+  {
+   "dataset": "Deep100M",
+   "method": "plain",
+   "selected": true,
+   "config": "fixed ef=1000 (conservative)",
+   "recall": 0.96707,
+   "ndc": 14780.1,
+   "attainment": 0.921,
+   "source": "plain frontier, Deep100M",
+   "reaches_target": true,
+   "grid_limited": null
+  },
+  {
+   "dataset": "Deep100M",
+   "method": "DARTH",
+   "config": "OOF, stop=0.95",
+   "recall": 0.9216,
+   "ndc": 8193,
+   "attainment": 0.727,
+   "source": "adaptive_termination_laet_high/result.json",
+   "selected": true,
+   "pending": false
+  },
+  {
+   "dataset": "Deep100M",
+   "method": "DARTH",
+   "config": "SHIFTED stop=0.95",
+   "recall": 0.93914,
+   "ndc": 23682.9,
+   "attainment": 0.848,
+   "source": "deep100m_summary 4.2 -- shifted population, not plotted",
+   "selected": false,
+   "pending": false
+  },
+  {
+   "dataset": "Deep100M",
+   "method": "LAET",
+   "config": "OOF, auto a~1.2",
+   "recall": 0.9014,
+   "ndc": 5411,
+   "attainment": 0.648,
+   "source": "adaptive_termination_laet_high/result.json",
+   "selected": false,
+   "pending": false
+  },
+  {
+   "dataset": "Deep100M",
+   "method": "LAET",
+   "config": "OOF, a=2.00",
+   "recall": 0.9453,
+   "ndc": 8833,
+   "attainment": 0.85,
+   "source": "adaptive_termination_laet_high/result.json",
+   "selected": true,
+   "pending": false
+  },
+  {
+   "dataset": "Deep100M",
+   "method": "LAET",
+   "config": "SHIFTED calibrated a=1.65",
+   "recall": 0.91648,
+   "ndc": 15479.9,
+   "attainment": 0.675,
+   "source": "deep100m_summary 4.2 -- shifted population, not plotted",
+   "selected": false,
+   "pending": false
+  },
+  {
+   "dataset": "Deep100M",
+   "method": "Ours",
+   "config": "tiers [215,325,400], probe reused",
+   "recall": 0.914,
+   "ndc": 5654,
+   "attainment": 0.722,
+   "source": "deep100m_probe_planner_public.py",
+   "selected": true,
+   "pending": false
+  },
+  {
+   "dataset": "Deep100M",
+   "method": "Ours",
+   "config": "SHIFTED adaptive tiers, plain",
+   "recall": 0.90923,
+   "ndc": 13706.8,
+   "attainment": 0.638,
+   "source": "deep100m_summary 4.2 -- shifted population, not plotted",
+   "selected": false,
+   "pending": false
+  },
+  {
+   "dataset": "LAION-10M",
+   "method": "plain",
+   "selected": true,
+   "config": "fixed ef=3800 (conservative)",
+   "recall": 0.93899,
+   "ndc": 29001.9,
+   "attainment": 0.824,
+   "source": "plain frontier, LAION-10M",
+   "reaches_target": true,
+   "grid_limited": null
+  },
+  {
+   "dataset": "LAION-10M",
+   "method": "DARTH",
+   "config": "ef cap 2000",
+   "recall": 0.8912,
+   "ndc": 10849.3,
+   "attainment": 0.604,
+   "source": "laion10m adaptive_termination",
+   "selected": false,
+   "pending": false
+  },
+  {
+   "dataset": "LAION-10M",
+   "method": "DARTH",
+   "config": "ef cap 2200",
+   "recall": 0.9049,
+   "ndc": 13309,
+   "attainment": 0.669,
+   "source": "results/laion10m/adaptive_termination_ef2200",
+   "selected": true,
+   "pending": false
+  },
+  {
+   "dataset": "LAION-10M",
+   "method": "DARTH",
+   "config": "ef cap 2400",
+   "recall": 0.9132,
+   "ndc": 15390,
+   "attainment": 0.714,
+   "source": "results/laion10m/adaptive_termination_ef2400",
+   "selected": false,
+   "pending": false
+  },
+  {
+   "dataset": "LAION-10M",
+   "method": "DARTH",
+   "config": "ef cap 3000",
+   "recall": 0.9211,
+   "ndc": 18354,
+   "attainment": 0.744,
+   "source": "results/laion10m/adaptive_termination_ef3000",
+   "selected": false,
+   "pending": false
+  },
+  {
+   "dataset": "LAION-10M",
+   "method": "LAET",
+   "config": "ef cap 2000",
+   "recall": 0.9034,
+   "ndc": 12447.2,
+   "attainment": 0.691,
+   "source": "laion10m adaptive_termination",
+   "selected": true,
+   "pending": false
+  },
+  {
+   "dataset": "LAION-10M",
+   "method": "Ours",
+   "config": "322/823/2000 +PCANAV, hard-rej",
+   "recall": 0.8859,
+   "ndc": 8246,
+   "attainment": 0.655,
+   "source": "laion10m_summary 3.7, ORACLE",
+   "selected": false,
+   "pending": false
+  },
+  {
+   "dataset": "LAION-10M",
+   "method": "Ours",
+   "config": "400/1210/2000 +PCANAV, hard-rej",
+   "recall": 0.8964,
+   "ndc": 9477,
+   "attainment": null,
+   "source": "laion10m_summary 3.7, ORACLE",
+   "selected": false,
+   "pending": false
+  },
+  {
+   "dataset": "LAION-10M",
+   "method": "Ours",
+   "config": "322/823/3825 +PCANAV, hard-rej",
+   "recall": 0.9049,
+   "ndc": 11693,
+   "attainment": 0.72,
+   "source": "laion10m_summary 3.7, ORACLE",
+   "selected": false,
+   "pending": false
+  },
+  {
+   "dataset": "LAION-10M",
+   "method": "Ours",
+   "config": "400/1210/2000 +PCANAV, soft-adm",
+   "recall": 0.9011,
+   "ndc": 9477,
+   "attainment": 0.737,
+   "source": "laion10m_summary 3.7/3.10, ORACLE; recall interpolated, attainment from hard-rejection twin",
+   "selected": true,
+   "pending": false
+  }
+ ]
+}

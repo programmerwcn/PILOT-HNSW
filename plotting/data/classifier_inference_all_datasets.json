@@ -1,0 +1,238 @@
+{
+  "protocol": {
+    "scope": "LightGBM batch-one model invocation only; feature extraction excluded",
+    "input": "1000 deterministic dimension-matched float32 rows",
+    "warmup_calls_per_model_group": 100,
+    "repeats": 5,
+    "aggregation": "median microseconds/call across complete rounds",
+    "cpu_affinity": [
+      0
+    ],
+    "num_threads": 1,
+    "method_order": "rotated each round",
+    "pilot_selection": "GIST r20, SIFT r50, Deep r33, LAION r50; selected from held-out accuracy-latency sweeps",
+    "laion_pilot": "routing-only zero-anchor classifier"
+  },
+  "datasets": {
+    "GIST1M": {
+      "Pilot": {
+        "model_paths": [
+          "results/gist_zero_anchor/adaptive_pruned_models/adaptive_r20.txt"
+        ],
+        "features": 51,
+        "trees": 60,
+        "microseconds_per_call_rounds": [
+          38.995209,
+          41.215011,
+          41.613369,
+          40.546004,
+          41.552087
+        ],
+        "microseconds_per_call": 41.215011,
+        "calls_per_query": 1.0,
+        "microseconds_per_query": 41.215011
+      },
+      "LAET": {
+        "model_paths": [
+          "results/gist_zero_anchor/termination_models/laet.txt"
+        ],
+        "features": 965,
+        "trees": 100,
+        "microseconds_per_call_rounds": [
+          46.22254,
+          48.977792,
+          49.039536,
+          47.239841,
+          48.82461
+        ],
+        "microseconds_per_call": 48.82461,
+        "calls_per_query": 1.0,
+        "microseconds_per_query": 48.82461
+      },
+      "DARTH": {
+        "model_paths": [
+          "results/gist_zero_anchor/termination_models/darth.txt"
+        ],
+        "features": 11,
+        "trees": 100,
+        "microseconds_per_call_rounds": [
+          38.90718,
+          41.115042,
+          40.456756999999996,
+          40.077124000000005,
+          41.264711000000005
+        ],
+        "microseconds_per_call": 40.456756999999996,
+        "calls_per_query": 14.499668654738237,
+        "microseconds_per_query": 586.6095713452617
+      }
+    },
+    "SIFT100M": {
+      "Pilot": {
+        "model_paths": [
+          "results/sift100m/balanced_shifted_stress_M16efc100/pruned_models/adaptive_r50.txt"
+        ],
+        "features": 51,
+        "trees": 150,
+        "microseconds_per_call_rounds": [
+          41.473624,
+          43.551692,
+          43.398255,
+          43.442119,
+          43.617778
+        ],
+        "microseconds_per_call": 43.442119,
+        "calls_per_query": 1.0,
+        "microseconds_per_query": 43.442119
+      },
+      "LAET": {
+        "model_paths": [
+          "results/sift100m/balanced_shifted_stress_M16efc100/laet_ef2048_safe95/laet_lgbm.txt"
+        ],
+        "features": 133,
+        "trees": 100,
+        "microseconds_per_call_rounds": [
+          39.536021999999996,
+          41.818595,
+          41.343418,
+          41.539162,
+          40.576080999999995
+        ],
+        "microseconds_per_call": 41.343418,
+        "calls_per_query": 1.0,
+        "microseconds_per_query": 41.343418
+      },
+      "DARTH": {
+        "model_paths": [
+          "results/sift100m/balanced_shifted_stress_M16efc100/darth_laet_ef2048_transfer/darth_lgbm.txt"
+        ],
+        "features": 11,
+        "trees": 100,
+        "microseconds_per_call_rounds": [
+          38.663176,
+          40.259372000000006,
+          39.893551,
+          40.145163999999994,
+          38.911910000000006
+        ],
+        "microseconds_per_call": 39.893551,
+        "calls_per_query": 27.962962962962962,
+        "microseconds_per_query": 1115.541889074074
+      }
+    },
+    "Deep100M": {
+      "Pilot": {
+        "model_paths": [
+          "results/reported_walltime/deep_tier_model_r33.txt"
+        ],
+        "features": 51,
+        "trees": 99,
+        "microseconds_per_call_rounds": [
+          40.543288999999994,
+          43.135785000000006,
+          42.978367,
+          43.125182,
+          42.95431
+        ],
+        "microseconds_per_call": 42.978367,
+        "calls_per_query": 1.0,
+        "microseconds_per_query": 42.978367
+      },
+      "LAET": {
+        "model_paths": [
+          "results/deep100m/m16_efc100_k100/adaptive_termination_laet_high/laet_fold0.txt",
+          "results/deep100m/m16_efc100_k100/adaptive_termination_laet_high/laet_fold1.txt",
+          "results/deep100m/m16_efc100_k100/adaptive_termination_laet_high/laet_fold2.txt",
+          "results/deep100m/m16_efc100_k100/adaptive_termination_laet_high/laet_fold3.txt",
+          "results/deep100m/m16_efc100_k100/adaptive_termination_laet_high/laet_fold4.txt"
+        ],
+        "features": 101,
+        "trees": 100,
+        "microseconds_per_call_rounds": [
+          43.259798,
+          45.887881,
+          46.159824,
+          45.89007,
+          45.93908999999999
+        ],
+        "microseconds_per_call": 45.89007,
+        "calls_per_query": 1.0,
+        "microseconds_per_query": 45.89007
+      },
+      "DARTH": {
+        "model_paths": [
+          "results/deep100m/m16_efc100_k100/adaptive_termination/darth_fold0.txt",
+          "results/deep100m/m16_efc100_k100/adaptive_termination/darth_fold1.txt",
+          "results/deep100m/m16_efc100_k100/adaptive_termination/darth_fold2.txt",
+          "results/deep100m/m16_efc100_k100/adaptive_termination/darth_fold3.txt",
+          "results/deep100m/m16_efc100_k100/adaptive_termination/darth_fold4.txt"
+        ],
+        "features": 11,
+        "trees": 100,
+        "microseconds_per_call_rounds": [
+          42.213623,
+          44.499651,
+          44.667548000000004,
+          44.457987,
+          44.622876
+        ],
+        "microseconds_per_call": 44.499651,
+        "calls_per_query": 12.214,
+        "microseconds_per_query": 543.518737314
+      }
+    },
+    "LAION-10M": {
+      "Pilot": {
+        "model_paths": [
+          "results/laion10m/zero_anchor_routing_classifier_r50.txt"
+        ],
+        "features": 24,
+        "trees": 150,
+        "microseconds_per_call_rounds": [
+          44.251926,
+          46.340725,
+          46.651179,
+          46.042379999999994,
+          46.538818
+        ],
+        "microseconds_per_call": 46.340725,
+        "calls_per_query": 1.0,
+        "microseconds_per_query": 46.340725
+      },
+      "LAET": {
+        "model_paths": [
+          "results/laion10m/adaptive_termination/laet_lgbm.txt"
+        ],
+        "features": 517,
+        "trees": 100,
+        "microseconds_per_call_rounds": [
+          46.796152,
+          46.933038999999994,
+          46.452961,
+          46.279356,
+          46.954191
+        ],
+        "microseconds_per_call": 46.796152,
+        "calls_per_query": 1.0,
+        "microseconds_per_query": 46.796152
+      },
+      "DARTH": {
+        "model_paths": [
+          "results/laion10m/adaptive_termination/darth_lgbm.txt"
+        ],
+        "features": 11,
+        "trees": 400,
+        "microseconds_per_call_rounds": [
+          54.777586,
+          54.898039,
+          54.80367,
+          53.055267,
+          54.712029
+        ],
+        "microseconds_per_call": 54.777586,
+        "calls_per_query": 14.532,
+        "microseconds_per_query": 796.027879752
+      }
+    }
+  }
+}
