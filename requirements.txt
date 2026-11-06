@@ -1,5 +1,5 @@
-numpy
-matplotlib
-lightgbm
-scikit-learn
-joblib
+numpy>=1.23,<3
+matplotlib>=3.6,<4
+lightgbm>=3.1,<5
+scikit-learn>=1.2,<2
+joblib>=1.2,<2

@@ -1,0 +1,6 @@
+# Versions used for the local smoke tests (Python 3.9.21, GCC 9.4.0).
+numpy==1.26.4
+matplotlib==3.9.2
+lightgbm==3.1.1
+scikit-learn==1.6.1
+joblib==1.4.2

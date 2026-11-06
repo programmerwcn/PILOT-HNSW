@@ -1,0 +1,31 @@
+{
+  "base": "../data/toy_uint8/base.u8bin",
+  "query": "../data/toy_uint8/query.u8bin",
+  "work_dir": "../runs/toy_uint8",
+  "dtype": "uint8",
+  "k": 100,
+  "M": 16,
+  "ef_construction": 100,
+  "seed": 2025,
+  "probe_steps": 100,
+  "train_queries": 240,
+  "validation_queries": 80,
+  "test_queries": 80,
+  "pca_prefix": 32,
+  "pca_sample": 1000,
+  "ef_grid": [
+    100,
+    200,
+    400,
+    800
+  ],
+  "target_recall": 0.9,
+  "executors": [
+    "exact",
+    "partial",
+    "pca"
+  ],
+  "partial_block": 64,
+  "repeats": 2,
+  "trees": 30
+}

@@ -1,0 +1,29 @@
+{
+  "mode": "pilot",
+  "dtype": "float32",
+  "index": "../runs/toy/index.hnsw",
+  "query": "../runs/toy/queries.fbin",
+  "gt": "../runs/toy/gt.ibin",
+  "model": "../runs/toy/classifier.txt",
+  "model_metadata": "../runs/toy/model_metadata.json",
+  "pca_mean": "../runs/toy/pca_mean.fbin",
+  "pca_components": "../runs/toy/pca_components.fbin",
+  "caps": [
+    100,
+    200,
+    400
+  ],
+  "probe_steps": 100,
+  "k": 100,
+  "executor": "exact",
+  "repeats": 2,
+  "query_ids": [
+    320,
+    321,
+    322,
+    323,
+    324
+  ],
+  "output": "../runs/toy/example_search.json",
+  "log": "../runs/toy/example_search.log"
+}

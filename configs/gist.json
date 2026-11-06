@@ -1,0 +1,36 @@
+{
+  "dataset": "gist",
+  "base": "../data/gist/base.fbin",
+  "query": "../data/gist/query.fbin",
+  "work_dir": "../runs/gist",
+  "dtype": "float32",
+  "k": 100,
+  "M": 16,
+  "ef_construction": 100,
+  "seed": 2025,
+  "probe_steps": 50,
+  "train_queries": 5000,
+  "validation_queries": 500,
+  "test_queries": 1000,
+  "pca_prefix": 40,
+  "pca_sample": 50000,
+  "ef_grid": [
+    100,
+    200,
+    400,
+    800,
+    1600,
+    3200,
+    6400,
+    8000
+  ],
+  "plain_ef": 2680,
+  "target_recall": 0.9,
+  "executors": [
+    "exact",
+    "pca"
+  ],
+  "partial_block": 64,
+  "repeats": 5,
+  "trees": 100
+}

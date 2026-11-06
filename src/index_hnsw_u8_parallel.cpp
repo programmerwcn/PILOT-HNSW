@@ -5,6 +5,7 @@
 #include <cstdio>
 #include <exception>
 #include <fstream>
+#include <filesystem>
 #include <getopt.h>
 #include <iomanip>
 #include <iostream>
@@ -21,7 +22,7 @@ using hnswlib::HierarchicalNSW;
 using hnswlib::L2SpaceU8;
 
 struct Args {
-    std::string data, index, checkpoint;
+    std::string data, index, checkpoint, log;
     int M = 16, efc = 100, threads = 16, checkpoint_every = 10'000'000;
     size_t seed = 2025;
     bool resume = false;
@@ -29,19 +30,21 @@ struct Args {
 
 static Args parse(int argc, char** argv) {
     Args a; enum { CKPT = 1000, CKPT_EVERY, RESUME };
-    option opts[]={{"data",required_argument,nullptr,'d'},{"index",required_argument,nullptr,'i'},
+    option opts[]={{"log-file",required_argument,nullptr,'l'},{"help",no_argument,nullptr,'h'},{"data",required_argument,nullptr,'d'},{"index",required_argument,nullptr,'i'},
       {"M",required_argument,nullptr,'m'},{"ef-construction",required_argument,nullptr,'e'},
       {"threads",required_argument,nullptr,'j'},{"seed",required_argument,nullptr,'r'},
       {"checkpoint",required_argument,nullptr,CKPT},{"checkpoint-every",required_argument,nullptr,CKPT_EVERY},
       {"resume",no_argument,nullptr,RESUME},{nullptr,0,nullptr,0}};
-    int c; while((c=getopt_long(argc,argv,"d:i:m:e:j:r:",opts,nullptr))!=-1) switch(c){
+    int c; while((c=getopt_long(argc,argv,"d:i:m:e:j:r:l:h",opts,nullptr))!=-1) switch(c){
+      case 'h':std::cout<<"Usage: index_uint8 --data FILE --index FILE --log-file FILE [--threads N --M 16 --ef-construction 100 --seed 2025]\n";std::exit(0);
+      case 'l':a.log=optarg;break;
       case 'd':a.data=optarg;break; case 'i':a.index=optarg;break; case 'm':a.M=atoi(optarg);break;
       case 'e':a.efc=atoi(optarg);break; case 'j':a.threads=std::max(1,atoi(optarg));break;
       case 'r':a.seed=strtoull(optarg,nullptr,10);break; case CKPT:a.checkpoint=optarg;break;
       case CKPT_EVERY:a.checkpoint_every=std::max(0,atoi(optarg));break; case RESUME:a.resume=true;break;
       default: std::exit(2);
     }
-    if(a.data.empty()||a.index.empty()) { std::cerr<<"required: --data FILE --index FILE\n";std::exit(2); }
+    if(a.data.empty()||a.index.empty()||a.log.empty()||a.M<=0||a.efc<=0) { std::cerr<<"required: --data FILE --index FILE --log-file FILE (positive M/ef-construction)\n";std::exit(2); }
     if(a.checkpoint.empty()) a.checkpoint=a.index+".checkpoint";
     return a;
 }
@@ -53,7 +56,16 @@ static void header(const std::string& path,size_t& n,size_t& d){
 }
 
 int main(int argc,char** argv){
-    Args a=parse(argc,argv);size_t n=0,d=0;header(a.data,n,d);L2SpaceU8 space(d);
+    Args a=parse(argc,argv);
+    if(!std::filesystem::is_regular_file(a.data))throw std::runtime_error("input file does not exist");
+    for(const auto&p:{a.index,a.log,a.checkpoint}){
+        auto parent=std::filesystem::path(p).parent_path();if(!parent.empty())std::filesystem::create_directories(parent);
+    }
+    auto absolute=[](const std::string&p){return std::filesystem::absolute(p).lexically_normal();};
+    if(absolute(a.data)==absolute(a.index)||absolute(a.data)==absolute(a.log)||absolute(a.index)==absolute(a.log))
+        throw std::runtime_error("data, index and log must use distinct paths");
+    if(!std::freopen(a.log.c_str(),"a",stderr))throw std::runtime_error("cannot open log file");
+    size_t n=0,d=0;header(a.data,n,d);L2SpaceU8 space(d);
     std::unique_ptr<HierarchicalNSW<int>> index;int resume_from=1;
     auto started=std::chrono::steady_clock::now();
     if(a.resume){

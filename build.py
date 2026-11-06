@@ -2,9 +2,12 @@
 import argparse
 from pathlib import Path
 import subprocess
+import shutil
+import importlib.util
 
 ROOT = Path(__file__).resolve().parent
 TARGETS = {
+    'pilot_search': 'reproduction/search.cpp',
     'index_float': 'src/index_hnsw.cpp',
     'index_uint8': 'src/index_hnsw_u8_parallel.cpp',
     'probe_gist': 'src/gist_zero_anchor_features.cpp',
@@ -21,11 +24,23 @@ def main():
     parser.add_argument('--cxx', default='g++')
     parser.add_argument('--eigen-include', type=Path, default=Path('/usr/include/eigen3'))
     parser.add_argument('--jsoncpp-include', type=Path, default=Path('/usr/include/jsoncpp'))
-    parser.add_argument('--lightgbm-lib', type=Path, required=True, help='Full path to lib_lightgbm.so')
+    parser.add_argument('--lightgbm-lib', type=Path, help='Full path to lib_lightgbm.so; otherwise discover the installed Python package')
     parser.add_argument('--output', type=Path, default=ROOT/'build')
     args = parser.parse_args()
     if not (args.eigen_include/'Eigen/Dense').is_file():
         parser.error('--eigen-include must contain Eigen/Dense')
+    if not shutil.which(args.cxx):
+        parser.error('C++ compiler not found; install g++ or supply --cxx')
+    if not (args.jsoncpp_include/'json/json.h').is_file():
+        parser.error('jsoncpp headers missing; install libjsoncpp-dev or supply --jsoncpp-include')
+    if args.lightgbm_lib is None:
+        spec = importlib.util.find_spec('lightgbm')
+        if spec is None or spec.origin is None:
+            parser.error('Install lightgbm in this Python environment or supply --lightgbm-lib')
+        candidates = sorted(Path(spec.origin).parent.rglob('lib_lightgbm.so'))
+        if len(candidates) != 1:
+            parser.error('Cannot uniquely locate lib_lightgbm.so; supply --lightgbm-lib')
+        args.lightgbm_lib = candidates[0]
     lib = args.lightgbm_lib.resolve()
     if not lib.is_file():
         parser.error('--lightgbm-lib does not exist')

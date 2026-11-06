@@ -1,0 +1,31 @@
+{
+  "base": "../data/toy/base.fbin",
+  "query": "../data/toy/query.fbin",
+  "work_dir": "../runs/toy",
+  "dtype": "float32",
+  "k": 100,
+  "M": 16,
+  "ef_construction": 100,
+  "seed": 2025,
+  "probe_steps": 100,
+  "train_queries": 240,
+  "validation_queries": 80,
+  "test_queries": 80,
+  "pca_prefix": 32,
+  "pca_sample": 1000,
+  "ef_grid": [
+    100,
+    200,
+    400,
+    800
+  ],
+  "target_recall": 0.9,
+  "executors": [
+    "exact",
+    "partial",
+    "pca"
+  ],
+  "partial_block": 64,
+  "repeats": 2,
+  "trees": 30
+}

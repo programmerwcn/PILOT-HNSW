@@ -1,0 +1,35 @@
+{
+  "dataset": "sift",
+  "base": "../data/sift/base.u8bin",
+  "query": "../data/sift/query.u8bin",
+  "work_dir": "../runs/sift",
+  "dtype": "uint8",
+  "k": 100,
+  "M": 16,
+  "ef_construction": 100,
+  "seed": 2025,
+  "probe_steps": 50,
+  "train_queries": 5000,
+  "validation_queries": 500,
+  "test_queries": 1000,
+  "pca_prefix": 32,
+  "pca_sample": 50000,
+  "ef_grid": [
+    100,
+    200,
+    400,
+    800,
+    1600,
+    3200,
+    6400,
+    8000
+  ],
+  "plain_ef": 2048,
+  "target_recall": 0.9,
+  "executors": [
+    "exact"
+  ],
+  "partial_block": 64,
+  "repeats": 5,
+  "trees": 100
+}

@@ -12,6 +12,7 @@
 #include <mutex>
 #include <cstdio>
 
+#include <filesystem>
 #include "matrix.h"
 #include "utils.h"
 #include "hnswlib/hnswlib.h"
@@ -278,14 +279,14 @@ void print_usage(char* self) {
     std::cerr << "Usage: " << self << " [options]" << std::endl;
     std::cerr << "Options:" << std::endl;
     std::cerr << "  -d, --debug              Enable debug mode (full logging)" << std::endl;
-    std::cerr << "  -l, --log-file FILE      Write logs to FILE (default: stderr)" << std::endl;
+    std::cerr << "  -l, --log-file FILE      Write logs to FILE (required)" << std::endl;
     std::cerr << "  -v, --log-level LEVEL    Set log level (error|warn|info|debug|trace)" << std::endl;
     std::cerr << "  -p, --path_data FILE     Input data file path (required)" << std::endl;
     std::cerr << "  -i, --path_index FILE    Output index file path (required)" << std::endl;
-    std::cerr << "  -m, --M INT              HNSW parameter M (required)" << std::endl;
-    std::cerr << "  -e, --ef_construction INT HNSW parameter ef_construction (required)" << std::endl;
+    std::cerr << "  -m, --M INT              HNSW parameter M (default: 16)" << std::endl;
+    std::cerr << "  -e, --ef_construction INT HNSW parameter ef_construction (default: 100)" << std::endl;
     std::cerr << "  -t, --data_type INT      Data type (0:float, 1:uint8, 2:int8, default:0)" << std::endl;
-    std::cerr << "  --build_mode MODE        Build mode (plain|hierarchy, default: plain)" << std::endl;
+    std::cerr << "  --build_mode MODE        Build mode (plain|hierarchy|parallel, default: plain)" << std::endl;
     std::cerr << "  --random_seed INT        Random seed for reproducible hierarchy (default: 100)" << std::endl;
     std::cerr << "  -h, --help               Show this help message" << std::endl;
 }
@@ -590,9 +591,9 @@ void create_hnsw_index(char* data_path, char* index_path, size_t efConstruction,
 int main(int argc, char * argv[]) {
     LogMode log_mode = LogMode::DEBUG;
     LogLevel log_level = LogLevel::INFO;
-    std::string log_file_path = "/home/wcn/indexAdvisor/Steiner-hardness/results/logs/index_hnsw_ef100_M16.log";
-    char* path_data = "/home/wcn/indexAdvisor/Steiner-hardness/data/gist/gist_base.fvecs";
-    char* path_index = "/home/wcn/indexAdvisor/Steiner-hardness/data/gist/gist_ef100_M16.index_plain";
+    std::string log_file_path;
+    char* path_data = nullptr;
+    char* path_index = nullptr;
     int M = 16, ef_construction = 100;
     int data_type = 0;
     std::string build_mode = "plain";
@@ -710,13 +711,26 @@ int main(int argc, char * argv[]) {
         }
     }
 
-    initLogging(log_mode, log_level, log_file_path);
-
-    if (path_data == nullptr || path_index == nullptr || M == 0 || ef_construction == 0) {
-        HNSW_LOG_ERROR("path_data, path_index, M, and ef_construction are required arguments.");
-        print_usage(argv[0]);
-        return 1;
+    if (!path_data || !path_index || log_file_path.empty() || M <= 0 || ef_construction <= 0) {
+        std::cerr << "Required: --path_data FILE --path_index FILE --log-file FILE; M and ef_construction must be positive.\n";
+        return 2;
     }
+    if (!std::filesystem::is_regular_file(path_data)) {
+        std::cerr << "Input file does not exist: " << path_data << '\n'; return 2;
+    }
+    for (const auto& path : {std::string(path_index), log_file_path}) {
+        auto parent = std::filesystem::path(path).parent_path();
+        if (!parent.empty()) std::filesystem::create_directories(parent);
+    }
+    if (std::filesystem::absolute(path_data).lexically_normal() == std::filesystem::absolute(path_index).lexically_normal() ||
+        std::filesystem::absolute(path_data).lexically_normal() == std::filesystem::absolute(log_file_path).lexically_normal() ||
+        std::filesystem::absolute(path_index).lexically_normal() == std::filesystem::absolute(log_file_path).lexically_normal()) {
+        std::cerr << "Data, index and log must use distinct paths.\n"; return 2;
+    }
+    std::ofstream log_check(log_file_path, std::ios::app);
+    if (!log_check) { std::cerr << "Cannot write log file\n"; return 2; }
+    log_check.close();
+    initLogging(log_mode, log_level, log_file_path);
 
     HNSW_LOG_INFO("Building index with M=", M, ", ef_construction=", ef_construction,
                   ", build_mode=", build_mode, ", random_seed=", random_seed,

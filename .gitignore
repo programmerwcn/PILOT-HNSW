@@ -1,0 +1,7 @@
+/build/
+/data/
+/runs/
+__pycache__/
+*.pyc
+.venv/
+/plotting/figures/
